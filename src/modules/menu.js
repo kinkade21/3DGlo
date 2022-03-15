@@ -1,36 +1,28 @@
 "use strict";
+import { animate } from './helpers';
 
 const menu = () => {
 
     // блок меню
     const menu = document.querySelector('menu');
 
-    // плавный скролл по a.href  (пока, согласно задания, только ВНИЗ !!!)
-    // любой проход за 1 сек (1000мс)
-    // для большинства экранов частота обновления 60 Гц–:  1000ms / 60 = за 16.7 кадров
-    const smoothScroll = (href) => {
-
-        // ссылка на элемент перехода
-        const transitionElement = document.querySelector(href);
+    // плавный скролл по a.href  (пока, согласно задания, только ВНИЗ !!!)    
+    const smoothScroll = (e, href) => {
+        e.preventDefault();
 
         // счетчик прокрученных строк и целевое кол-во строк к прокрутке всё за 1 сек
-        let scrollY = Math.round(window.scrollY);
-        const scrollTarget = Math.round(transitionElement.getBoundingClientRect().top) + scrollY;
-        // шаг скрола (количество px за одно обновление экрана)
-        const stepScroll = Math.round((scrollTarget - scrollY) / 16.7);
+        const scrollY = window.scrollY;
+        // необходимо докрутить до начала элемента перехода
+        const transitionHeight = document.querySelector(href).getBoundingClientRect().top;
 
-        event.preventDefault();
-
-        (function animation() {
-            scrollY += stepScroll;
-            if ((scrollY < scrollTarget) ||
-                (scrollY - scrollTarget < stepScroll)) {
-                requestAnimationFrame(animation);
+        animate({
+            duration: 1000,
+            timingplane: 'easeOutCubic',
+            draw(progress) {
                 // вертикальный скролл документа 
-                window.scrollTo(0, Math.min(scrollY, scrollTarget));
+                window.scrollTo(0, scrollY + transitionHeight * progress);
             }
-        })();
-
+        });
     };
 
     document.querySelector('body').addEventListener('click', (e) => {
@@ -48,11 +40,11 @@ const menu = () => {
         } else if ((nextBlock = e.target.closest('main a'))) {
 
             // переход на следующий блок
-            smoothScroll(nextBlock.getAttribute("href"));
+            smoothScroll(e, nextBlock.getAttribute("href"));
         }
 
-        // плавный скролл по нажатию на пункт меню
-        if (itemMenu) { smoothScroll(itemMenu.getAttribute("href")); }
+        // плавный скролл по нажатию на пункт меню        
+        if (itemMenu) { smoothScroll(e, itemMenu.getAttribute("href")); }
     });
 
 }; 

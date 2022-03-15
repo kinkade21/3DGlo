@@ -1,4 +1,3 @@
-// формы обратной связи
 "use strict";
 
 const feedback = () => {
@@ -15,7 +14,7 @@ const feedback = () => {
     // - type=tel: цифры, круглые скобки и дефис    
     const invalid = {
         text: /[^а-я-\s]+/gi,
-        email: /[^a-z\_\-\@\.\!\~\*\']+/gi,
+        email: /[^a-zа-я\_\-\@\.\!\~\*\']+/gi,
         rus: /[а-я]/gi,
         phone: /[^\d\-()']+/gi,
         // пробелы или дефисы в начале и конце 
@@ -48,7 +47,7 @@ const feedback = () => {
         field.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(invalid.email, "");
         });
-        
+        // дополнительный контроль на русских диверасантов
         field.addEventListener('blur', (e) => {
             // удаление кирилицы
             e.target.value = e.target.value.replace(invalid.rus, (rus) => "");

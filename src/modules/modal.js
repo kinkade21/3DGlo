@@ -1,5 +1,5 @@
-// Форма заявки в Блоке Наши услуги
 "use strict";
+import { animate } from './helpers';
 
 const modal = () => {
 
@@ -10,26 +10,24 @@ const modal = () => {
     // кнопки подать заяку
     const buttons = document.querySelectorAll('.popup-btn');
 
+
     // анимация контекста модального окна    
     const animationPopupContent = () => {
-        // максимальное количество анимаций
-        const maxCountAnimation = Math.round(
-            (100 - popupContent.getBoundingClientRect().left * 100 / window.innerWidth));
-        // счетчик анимаций, максимальное количество анимаций
-        let countAnimation = 30;
+        const heightInProcent = 100 - popupContent.getBoundingClientRect().left * 100 / window.innerWidth;
 
-        (function animation() {
-            if (countAnimation < maxCountAnimation) {
-                requestAnimationFrame(animation);
+        animate({
+            timingplane: 'aseOutExpo',     // на основе кривой Безье       
+            draw(progress) {               // отрисовка  
+                popupContent.style.opacity = `${progress}`;
+                popupContent.style.left = `${100 - progress * heightInProcent}%`;
                 popupContent.style.transform = `translateX( 0px )`;
-                popupContent.style.left = `${100 - countAnimation}%`;
-                countAnimation++;
-            } else {
-                // восстанавливаем стили верстки            
-                popupContent.style.left = '';
-                popupContent.style.transform = ``;
             }
-        })();
+        });
+
+        // восстанавливаем стили верстки            
+        popupContent.style.left = '';
+        popupContent.style.transform = ``;
+        popupContent.style.opacity = '';
     };
 
     // открытие заявки (модальное окно)
@@ -50,6 +48,5 @@ const modal = () => {
         }
     });
 
-};  
-
+};
 export default modal;

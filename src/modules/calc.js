@@ -1,4 +1,5 @@
 "use strict";
+import { animate } from './helpers';
 
 const calc = (price = 100) => {
 
@@ -12,23 +13,15 @@ const calc = (price = 100) => {
     const total = document.getElementById('total');
 
 
-    // анимация отображения итога за 2сек
-    const animationTotal = (currentValue) => {
-
-        // начальное значение отображаемого числа
-        let value = 0;
-        // шаг увеличения отображаемого числа
-        const step = Math.round(currentValue / 16.7 / 2);
-
-        (function animation() {
-            value += step;
-            if ((value < currentValue) ||
-                (value - currentValue < step)) {
-                requestAnimationFrame(animation);
-                // отображение анимации итога
-                total.textContent = Math.min(value, currentValue);
+    // анимация отображения итога 
+    const animationTotal = ([oldValue, newValue]) => {
+        animate({
+            duration: 500,
+            timingplane: 'easeInOutCubic',
+            draw(progress) {
+                total.textContent = oldValue + Math.round(progress * (newValue - oldValue));
             }
-        })();
+        });
     };
 
     // функцию отложенного вывода 
@@ -64,11 +57,9 @@ const calc = (price = 100) => {
 
         totalValue = Math.round(price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue);
 
-        total.textContent = totalValue;
-
-        if (totalValue) {
+        if (+total.textContent !== totalValue) {
             // анимация вывода результата с задержкой 500мс  
-            (calcBlock.debounce(animationTotal, 500))(totalValue);
+            (calcBlock.debounce(animationTotal, 300))([+total.textContent, totalValue]);
         }
     };
 
