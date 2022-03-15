@@ -14,7 +14,7 @@ const feedback = () => {
     const valid = {
         // именные проверки
         "user_name": /[^а-яё\s]+/gi,
-        "user_email": /[^a-z\_\-\@\.\!\~\*\']+/gi,
+        "user_email": /[^a-z\_\-\@\.\!\~\*\'\d]+/gi,
         "user_phone": /[^\d\-\+\(\)']+/gi,
         "user_message": /[^а-яё\s\d\.\,\;\:\-\?\!\)\(\"]+/gi,
 
