@@ -1,5 +1,5 @@
 // точка входа
-import one from './modules/one';
-import two from './modules/two';
-one();
-two(); 
+import timer from './modules/timer';
+//import two from './modules/two';
+timer("19 march 2022 16:20");
+//two(); 

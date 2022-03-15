@@ -1,6 +1,0 @@
-"use strict";
-
-const one = () => {
-    console.log('one');
-};
-export default one;
