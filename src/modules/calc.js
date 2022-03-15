@@ -68,7 +68,7 @@ const calc = (price = 100) => {
 
         if (totalValue) {
             // анимация вывода результата с задержкой 500мс  
-            (calcBlock.debounce(animationTotal, 500))(totalValue);
+            (calcBlock.debounce(animationTotal, 0))(totalValue);
         }
     };
 
