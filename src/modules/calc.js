@@ -16,7 +16,7 @@ const calc = (price = 100) => {
     // анимация отображения итога 
     const animationTotal = ([oldValue, newValue]) => {
         animate({
-            duration: 500,
+            duration: 0,
             timingplane: 'easeInOutCubic',
             draw(progress) {
                 total.textContent = oldValue + Math.round(progress * (newValue - oldValue));
@@ -59,7 +59,7 @@ const calc = (price = 100) => {
 
         if (+total.textContent !== totalValue) {
             // анимация вывода результата с задержкой 500мс  
-            (calcBlock.debounce(animationTotal, 300))([+total.textContent, totalValue]);
+            (calcBlock.debounce(animationTotal, 0))([+total.textContent, totalValue]);
         }
     };
 
