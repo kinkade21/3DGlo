@@ -48,6 +48,6 @@ const modal = () => {
         modal.style.display = 'none';
     });
 
-};  // END modal()
+};  
 
 export default modal;

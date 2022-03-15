@@ -1,3 +1,4 @@
+
 "use strict";
 
 const menu = () => {
@@ -19,17 +20,20 @@ const menu = () => {
     };
 
     // плавный скролл по a.href  (пока, согласно задания, только ВНИЗ !!!)
+    // любой проход за 1 сек (1000мс)
+    // для большинства экранов частота обновления 60 Гц–:  1000ms / 60 = за 16.7 кадров
     const smoothScroll = (event) => {
         // ссылка на элемент перехода
         const transitionElement = document.querySelector(event.currentTarget.hash);
-        // шаг скрола (количество px за одно обновление экрана)
-        const stepScroll = 25;
 
-        // счетчик прокрученных строк и целевое кол-во строк к прокрутке
+        // счетчик прокрученных строк и целевое кол-во строк к прокрутке всё за 1 сек
         let scrollY = Math.round(window.scrollY);
         const scrollTarget = Math.round(transitionElement.getBoundingClientRect().top) + scrollY;
+        // шаг скрола (количество px за одно обновление экрана)
+        const stepScroll = Math.round((scrollTarget - scrollY) / 16.7);
 
         event.preventDefault();
+
         (function animation() {
             scrollY += stepScroll;
             if ((scrollY < scrollTarget) ||
@@ -39,6 +43,7 @@ const menu = () => {
                 window.scrollTo(0, Math.min(scrollY, scrollTarget));
             }
         })();
+
     };
 
     // открытие/закрытие меню по кнопке меню
@@ -52,5 +57,5 @@ const menu = () => {
     // кнопка перехода на следующий блок
     nextBtn.addEventListener('click', smoothScroll);
 
-};
+}; // END menu()
 export default menu;
