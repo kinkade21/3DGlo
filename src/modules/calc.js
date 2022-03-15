@@ -18,7 +18,7 @@ const calc = (price = 100) => {
         // начальное значение отображаемого числа
         let value = 0;
         // шаг увеличения отображаемого числа
-        const step = Math.round(currentValue / 16.7 / 0);
+        const step = Math.round(currentValue / 16.7 / 2);
 
         (function animation() {
             value += step;
@@ -68,7 +68,7 @@ const calc = (price = 100) => {
 
         if (totalValue) {
             // анимация вывода результата с задержкой 500мс  
-            (calcBlock.debounce(animationTotal, 0))(totalValue);
+            (calcBlock.debounce(animationTotal, 30))(totalValue);
         }
     };
 
