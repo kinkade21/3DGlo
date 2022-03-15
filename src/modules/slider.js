@@ -121,16 +121,6 @@ const slider = (init, timeInterval = 1500) => {
 
     };
 
-    // отображение состояния активности кнопок навигации
-    const statusButtons = (disabledPrev, disabledNext) => {
-        if (buttonPrev) {
-            buttonPrev.style.filter = disabledPrev ? 'brightness(0.5)' : '';
-        }
-        if (buttonNext) {
-            buttonNext.style.filter = disabledNext ? 'brightness(0.5)' : '';
-        }
-    };
-
     // автоматическое смена слайдов
     const autoSlide = () => {
         prevSlide(currentSlide);
@@ -140,7 +130,6 @@ const slider = (init, timeInterval = 1500) => {
             currentSlide = 0;
         }
 
-        statusButtons(currentSlide === 0, currentSlide === (slides.length - 1));
         nextSlide(currentSlide);
     };
 
@@ -163,9 +152,14 @@ const slider = (init, timeInterval = 1500) => {
         prevSlide(currentSlide);
 
         if (e.target.classList.contains(classSlider.buttonNext)) {
-            currentSlide++;
+            if (++currentSlide >= slides.length) {
+                currentSlide = 0;
+            }
+
         } else if (e.target.classList.contains(classSlider.buttonPrev)) {
-            currentSlide--;
+            if (--currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
         } else if (e.target.classList.contains(classSlider.switch)) {
             switches.forEach((dot, index) => {
                 if (e.target === dot) {
@@ -173,9 +167,7 @@ const slider = (init, timeInterval = 1500) => {
                 }
             });
         }
-        currentSlide = Math.min(Math.max(currentSlide, 0), slides.length - 1);
 
-        statusButtons(currentSlide === 0, currentSlide === (slides.length - 1));
         nextSlide(currentSlide);
     });
 
@@ -203,5 +195,5 @@ const slider = (init, timeInterval = 1500) => {
     }
 
     return null;
-}; 
+};
 export default slider;

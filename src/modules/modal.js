@@ -13,20 +13,17 @@ const modal = () => {
 
     // анимация контекста модального окна    
     const animationPopupContent = () => {
-        const heightInProcent = 100 - popupContent.getBoundingClientRect().left * 100 / window.innerWidth;
 
         animate({
             timingplane: 'aseOutExpo',     // на основе кривой Безье       
             draw(progress) {               // отрисовка  
                 popupContent.style.opacity = `${progress}`;
-                popupContent.style.left = `${100 - progress * heightInProcent}%`;
-                popupContent.style.transform = `translateX( 0px )`;
+                popupContent.style.left = `${100 - progress * 50}%`;
+                popupContent.style.transform = `translateX( ${-20 * progress}rem )`;
             }
         });
 
-        // восстанавливаем стили верстки            
-        popupContent.style.left = '';
-        popupContent.style.transform = ``;
+        // восстанавливаем стили верстки                    
         popupContent.style.opacity = '';
     };
 
@@ -48,5 +45,5 @@ const modal = () => {
         }
     });
 
-};
+};  
 export default modal;
