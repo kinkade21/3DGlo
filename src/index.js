@@ -18,17 +18,7 @@ feedback();
 tabs();
 
 // слайдер параметры: css стили элементов, обязательный slider(<ul></ul>) slide(<li></li>)
-slider({
-  slider: 'portfolio-content',
-  slide: 'portfolio-item',
-  slideActive: 'portfolio-item-active',
-  button: 'portfolio-btn',
-  buttonPrev: 'prev',
-  buttonNext: 'next',
-  switchList: 'portfolio-dots',
-  switch: 'dot',
-  switchActive: 'dot-active',
-}, 2000);
+slider();
 
 // отправка формы параметры: сервер отправки, дополнительные данные к отправке
 sendForm('https://jsonplaceholder.typicode.com/posts',
