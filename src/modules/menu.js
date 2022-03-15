@@ -1,30 +1,17 @@
-
 "use strict";
 
 const menu = () => {
 
-    // кнопка меню
-    const menuBtn = document.querySelector('.menu');
     // блок меню
     const menu = document.querySelector('menu');
-    // кнопка закрытия блока меню
-    const closeBtn = menu.querySelector('.close-btn');
-    // список <a> пунктов меню
-    const menuItems = menu.querySelectorAll('ul>li>a');
-    // кнопка перехода на следующий блок
-    const nextBtn = document.querySelector('main a');
-
-    // открытие/закрытие меню
-    const handleMenu = () => {
-        menu.classList.toggle('active-menu');
-    };
 
     // плавный скролл по a.href  (пока, согласно задания, только ВНИЗ !!!)
     // любой проход за 1 сек (1000мс)
     // для большинства экранов частота обновления 60 Гц–:  1000ms / 60 = за 16.7 кадров
-    const smoothScroll = (event) => {
+    const smoothScroll = (href) => {
+
         // ссылка на элемент перехода
-        const transitionElement = document.querySelector(event.currentTarget.hash);
+        const transitionElement = document.querySelector(href);
 
         // счетчик прокрученных строк и целевое кол-во строк к прокрутке всё за 1 сек
         let scrollY = Math.round(window.scrollY);
@@ -46,16 +33,27 @@ const menu = () => {
 
     };
 
-    // открытие/закрытие меню по кнопке меню
-    menuBtn.addEventListener('click', handleMenu);
-    // закрытие окна меню по кнопке закрытия 
-    closeBtn.addEventListener('click', handleMenu);
-    // закрытие окна по нажатию на пункт меню
-    menuItems.forEach(menuItem => menuItem.addEventListener('click', handleMenu));
-    // плавный скролл по нажатию на пункт меню
-    menuItems.forEach(menuItem => menuItem.addEventListener('click', smoothScroll));
-    // кнопка перехода на следующий блок
-    nextBtn.addEventListener('click', smoothScroll);
+    document.querySelector('body').addEventListener('click', (e) => {
+        let itemMenu = null, nextBlock;
 
-}; // END menu()
+        if (e.target.closest('.menu') ||                  // по кнопке открытия меню
+            e.target.classList.contains('close-btn') ||     // или кнопке закрытия блока меню       
+            (itemMenu = e.target.closest('menu ul>li>a')) ||    // по нажатию на пункт меню
+            (!e.target.closest('.active-menu') &&           // по нажатии мимо окошка или крестик
+                menu.classList.contains('active-menu'))) {
+
+            // открытие/закрытие меню 
+            menu.classList.toggle('active-menu');
+
+        } else if ((nextBlock = e.target.closest('main a'))) {
+
+            // переход на следующий блок
+            smoothScroll(nextBlock.getAttribute("href"));
+        }
+
+        // плавный скролл по нажатию на пункт меню
+        if (itemMenu) { smoothScroll(itemMenu.getAttribute("href")); }
+    });
+
+}; 
 export default menu;
