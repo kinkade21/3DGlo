@@ -50,12 +50,11 @@ const sendForm = ({
 
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id)
-            if (elem.type === 'block') {
+            if (elem.type === 'block' && element.textContent != '0') {
                 formBody[elem.id] = element.textContent
             } else if (elem.type === 'input') {
                 formBody[elem.id] = element.value
-            } else  if (!elem.type === '0') {
-            }
+            } 
         })
 
         if (validate(formElements)) {

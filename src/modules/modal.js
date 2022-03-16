@@ -34,6 +34,7 @@ const modal = () => {
     buttons.forEach(btn => {
         btn.addEventListener('click', (event) => {
             modal.style.display = 'block';
+            modal.style.color = 'white'
             document.body.style.overflowY = "hidden";
             // анимация контекста модального окна при ширине экрана больше или равна 768                        
             if (window.innerWidth > 767) { animationPopupContent(); }
@@ -43,10 +44,10 @@ const modal = () => {
     modal.addEventListener('click', (e) => {
         // закрытие заявки (модальное окно)
         // при нажатии мимо окошка или крестик
-        document.body.style.overflowY = "";
         if (!e.target.closest('.popup-content') ||
             e.target.classList.contains('popup-close')) {
             modal.style.display = 'none';
+            document.body.style.overflowY = "";
         }
     });
 
