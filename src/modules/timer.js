@@ -19,18 +19,29 @@ const timer = (deadline) => {
     };
 
     // обновление времени
-    const updateClock = setInterval(() => {
+    const updateClock = () => {
         let getTime = getTimeRemaining();
 
-        timerHours.textContent = (getTime.hours < 10) ? '0' + getTime.hours : getTime.hours;
-        timerMinutes.textContent = ('0' + getTime.minutes).slice(-2);
-        timerSeconds.textContent = ('0' + getTime.seconds).slice(-2);
-
-        if (!getTime.timeRemaining) {
-            clearInterval(updateClock);
+        if(getTime.timeRemaining <= 0) {
+            timerHours.textContent = '00';
+            timerMinutes.textContent = '00';
+            timerSeconds.textContent = '00';
+        } else {
+            timerHours.textContent = addZerro(getTime.hours);
+            timerMinutes.textContent = addZerro(getTime.minutes);
+            timerSeconds.textContent = addZerro(getTime.seconds);
         }
-    }, 1000);
 
+        setInterval(function() {
+            if(getTime.timeRemaining > 0) {
+                updateClock();
+            }
+        }, 1000);
+
+    }
+
+    const addZerro = (num) => (num < 10) ? '0' + num : num;
+    updateClock();
 
 };
 export default timer;

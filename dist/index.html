@@ -195,28 +195,23 @@
           <img src="images/calc/flat.jpg" alt="Офис">
         </div>
         <div class="col-lg-6 col-12 flex">
-          <label class="calc-block">
-            <label style="font-size: 0.8em;">Тип объекта <br />
+            <div class="calc-block">
               <select class="calc-item calc-type" required>
-                <option class="calc-option-title" value="">Выберите тип объекта</option>
+                <option class="calc-option-title" value="">
+                  Выберите тип объекта*
+                </option>
                 <option value="1">Интерьер Квартиры</option>
                 <option value="1.4">Интерьер Частного дома</option>
                 <option value="2">Интерьер Офиса</option>
               </select>
-            </label>
-            <label style="font-size: 0.8em;">Общая площадь <br />
-              <input type="text" min="1" step="1" class="calc-item calc-square" placeholder="Общая площадь">
-            </label>
-            <label style="font-size: 0.8em;">Количество помещений* <br /> <input type="text" min="1" step="1"
-                class="calc-item calc-count" placeholder="Количество помещений">
-            </label>
-            <label style="font-size: 0.8em;">Срок исполнения (в днях)* <br /><input type="text" min="1" step="1"
-                class="calc-item calc-day" placeholder="Срок исполнения (в днях)">
-            </label>
-            <div class="calc-total">ИТОГО**: <span id="total">0</span></div>
-            <div class="calc-mini">* стоимость по умолчанию расчитывается на 1 помещение и срок 10 дней <br>
-              **точная стоимость и сроки работ обговариваются индивидуально, после
-              ознакомления с техническим заданием.
+              <input type="text" min="1" step="1" class="calc-item calc-square" placeholder="Общая площадь*" />
+              <input type="text" min="1" step="1" class="calc-item calc-count" placeholder="Количество помещений" />
+              <input type="text" min="1" step="1" class="calc-item calc-day" placeholder="Срок исполнения (в днях)" />
+              <div class="calc-total">ИТОГО: <span id="total">0</span></div>
+              <div class="calc-mini">* стоимость по умолчанию расчитывается на 1 помещение и срок 10 дней <br>
+                **точная стоимость и сроки работ обговариваются индивидуально, после
+                ознакомления с техническим заданием.
+              </div>
             </div>
         </div>
 

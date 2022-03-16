@@ -69,13 +69,5 @@ const menu = () => {
     });
 
 
-    // плавающая кнопка меню
-    window.addEventListener('scroll', (e) => {
-        reFloatingMenu();
-    });
-    window.addEventListener('resize', (e) => {
-        reFloatingMenu();
-    });
-
 }; 
 export default menu;
