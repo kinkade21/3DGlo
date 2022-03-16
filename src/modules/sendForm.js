@@ -54,6 +54,7 @@ const sendForm = ({
                 formBody[elem.id] = element.textContent
             } else if (elem.type === 'input') {
                 formBody[elem.id] = element.value
+            } else  if (!elem.type === '0') {
             }
         })
 
